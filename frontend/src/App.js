@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
+import CartPage from './pages/CartPage';
 
 const router = Routes([
   {
@@ -20,6 +21,10 @@ const router = Routes([
   {
     path: "/login",
     element: <LoginPage></LoginPage>,
+  },
+  {
+    path: "/cart",
+    element: <CartPage></CartPage>
   },
 ]);
 
