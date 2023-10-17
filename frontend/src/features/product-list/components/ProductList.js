@@ -2,6 +2,8 @@ import React from "react";
 import { Fragment, useState, useEffect } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon, StarIcon } from "@heroicons/react/24/outline";
+import { Pagination, Rating } from 'flowbite-react';
+
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -545,10 +547,11 @@ export default function ProductList() {
                                   </a>
                                 </h3>
                                 <p className="mt-1  text-sm text-left text-gray-500">
-                                  <StarIcon className="w-6 h-6 inline"></StarIcon>
-                                  <span className=" align-bottom">
+                                  {/* <StarIcon className="w-6 h-6 inline"></StarIcon> */}
+                                  <DefaultRating rating={product.rating}></DefaultRating>
+                                  {/* <span className=" align-bottom">
                                     {product.rating}
-                                  </span>
+                                  </span> */}
                                 </p>
                               </div>
                               <div>
@@ -575,7 +578,35 @@ export default function ProductList() {
           </section>
         </main>
       </div>
+      <DefaultPagination></DefaultPagination>
     </div>
   );
+}
+
+function DefaultPagination() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const onPageChange = (page) => setCurrentPage(page);
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      onPageChange={page=>{setCurrentPage(page)}}
+      totalPages={100}
+    />
+  )
+}
+
+function DefaultRating({rating}) {
+  const ratingInt = parseInt(rating)
+  const ratings = []
+  for(let i=0; i<ratingInt; i++){
+    ratings.push(<Rating.Star />)
+  }
+  return (
+    <Rating>
+      {ratings}
+      <Rating.Star filled={false} />
+    </Rating>
+  )
 }
 
